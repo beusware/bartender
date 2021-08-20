@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "outDir": "./build/",
+    "module": "es2020",
+    "target": "es5",
+    "baseUrl": "./src/",
+    "noImplicitAny": true,
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "typeRoots": [
+      "./node_modules/@types"
+    ],
+  },
+  "files": [
+    "./src/app.ts"
+  ],
+  "include": [
+    "./src/**/*", "build/app.js", 
+  ],
+  "exclude": [
+    "node_modules",
+  ]
+}
