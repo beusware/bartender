@@ -1,14 +1,15 @@
-import { Client, Intents, Message } from "discord.js";
+import { Client, Collection, Intents, Message } from "discord.js";
 
-import { CommandHandler } from "./helper/commandHandler";
+import { getCommandCollection } from "./helper/commandHandler";
 
 require("dotenv").config();
 
 const client: Client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
-const commandHandler: CommandHandler = new CommandHandler();
+let commandCollection: Collection<string, Function>;
 
 client.once("ready", async () => {
-  console.log(`Client online as ${client.user.tag} on ${client.guilds.cache.map((guild) => guild.name)}! Loaded ${commandHandler.collection.entries.length} commands!`);
+  commandCollection = await getCommandCollection();
+  console.log(`Client online as ${client.user.tag} on ${client.guilds.cache.map((guild) => guild.name)}! Loaded ${commandCollection.size} commands!`);
 });
 
 client.on("messageCreate", async (message: Message) => {
@@ -17,9 +18,7 @@ client.on("messageCreate", async (message: Message) => {
 
   let command: string = message.content.substr(1, message.content.length - 1).trim().toLowerCase().split(" ")[0];
 
-  console.log(commandHandler.collection.entries);
-
-  if (commandHandler.collection.get(command)) commandHandler.collection.get(command).call(message);
+  if (commandCollection.get(command)) commandCollection.get(command)(message);
 });
 
 client.login();

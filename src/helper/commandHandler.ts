@@ -1,17 +1,18 @@
 import { Collection } from "discord.js";
+import * as fs from "fs";
 
-export class CommandHandler {
-  collection: Collection<string, Function>;
+import "../commands/help";
+import "../commands/ping";
 
-  private _add = async (string: string): Promise<void> => {
-    let command: any = import(string);
+export const getCommandCollection = async (): Promise<Collection<string, Function>> => {
+  let collection: Collection<string, Function> = new Collection();
 
-    this.collection.set(command.name, command.command);
+  for (let file of fs.readdirSync("src/commands/")) {
+    let command: any = await import(`../commands/${file.substring(0, file.lastIndexOf("."))}`);
+    command = command[Object.keys(command)[1]];
+
+    collection.set(command.name, command.command);
   }
 
-  constructor() {
-    this.collection = new Collection();
-
-    this._add("../commands/ping");
-  }
+  return collection;
 }
