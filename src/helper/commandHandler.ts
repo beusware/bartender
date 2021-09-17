@@ -3,7 +3,11 @@ import * as fs from "fs";
 
 import "../commands/help";
 import "../commands/ping";
+import "../commands/play";
+import "../commands/skip";
+import "../commands/stop";
 
+// FIXME: Dynamic approach is not needed, if everything has to be pre-imported anyway
 export const getCommandCollection = async (): Promise<Collection<string, Function>> => {
   let collection: Collection<string, Function> = new Collection();
 

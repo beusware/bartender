@@ -12,9 +12,12 @@
   },
   "bin": "./build/app.js",
   "dependencies": {
-    "@discordjs/voice": "^0.5.6",
+    "@discordjs/opus": "^0.5.3",
+    "@discordjs/voice": "^0.6.0",
     "bufferutil": "^4.0.3",
-    "discord.js": "^13.0.1",
+    "discord.js": "^13.1.0",
+    "ffmpeg-static": "^4.4.0",
+    "sodium": "^3.0.2",
     "utf-8-validate": "^5.0.5",
     "ytdl-core": "^4.9.1"
   },
@@ -23,8 +26,8 @@
     "dotenv": "^10.0.0",
     "nodemon": "^2.0.12",
     "ts-node": "^10.2.0",
-    "typescript": "^4.2.4",
-    "tslib": "^2.3.0"
+    "tslib": "^2.3.0",
+    "typescript": "^4.2.4"
   },
   "repository": {
     "type": "git",

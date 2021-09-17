@@ -1,10 +1,10 @@
-import { Client, Collection, Intents, Message } from "discord.js";
+import { Client, Collection, Intents, Message} from "discord.js";
 
 import { getCommandCollection } from "./helper/commandHandler";
 
 require("dotenv").config();
 
-const client: Client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
+export const client: Client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_VOICE_STATES] });
 let commandCollection: Collection<string, Function>;
 
 client.once("ready", async () => {
@@ -13,8 +13,8 @@ client.once("ready", async () => {
 });
 
 client.on("messageCreate", async (message: Message) => {
-  if (message.content[0] != process.env.PREFIX) return;
   if (message.author.bot) return;
+  if (message.content[0] != process.env.PREFIX) return;
 
   let command: string = message.content.substr(1, message.content.length - 1).trim().toLowerCase().split(" ")[0];
 
