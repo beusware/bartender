@@ -10,7 +10,5 @@ export const ping = new Command("help", (message: Message) => {
       .addField("Musik", "`play`, `skip`, `stop`, `loop`")
       .addField("Anderes", "`ping`")
 
-  message.reply({
-    embeds: [ embed ],
-  });
+  message.reply({ embeds: [ embed ] });
 });

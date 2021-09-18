@@ -7,4 +7,3 @@ export class Command {
     this.command = command;
   }
 }
-
