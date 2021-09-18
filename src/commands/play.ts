@@ -1,5 +1,6 @@
 import { AudioPlayerStatus, joinVoiceChannel } from "@discordjs/voice";
 import { Message, VoiceChannel } from "discord.js";
+import * as ytdl from "ytdl-core";
 
 import { Command } from "../helper/commandClass";
 import { MusicHandler } from "../helper/musicHandler";
@@ -10,12 +11,14 @@ export const play = new Command("play", (message: Message) => {
 
   if (!voiceChannel) return message.reply("Geh in nen Voice!");
 
-  message.reply(`Ok!`);
-  MusicHandler.queue.push(songURL);
-  MusicHandler.id = message.guildId;
+  ytdl.getInfo(songURL).then((info) => {
+    message.reply(`:arrow_forward: Jawohl! Spiele \`${info.videoDetails.title}\`.`);
+    MusicHandler.queue.push(songURL);
+    MusicHandler.id = message.guildId;
 
-  connect(voiceChannel);
-  if (MusicHandler.player.state.status != AudioPlayerStatus.Playing) MusicHandler.play();
+    connect(voiceChannel);
+    if (MusicHandler.player.state.status != AudioPlayerStatus.Playing) MusicHandler.play();
+  });
 });
 
 const connect = (voiceChannel: VoiceChannel) => {
