@@ -12,6 +12,7 @@ client.once("ready", async () => {
   console.log(`Client online as ${client.user.tag} on ${client.guilds.cache.map((guild) => guild.name)}! Loaded ${commandCollection.size} commands!`);
 });
 
+// TODO: Add good loging
 client.on("messageCreate", async (message: Message) => {
   if (message.author.bot) return;
   if (message.content[0] != process.env.PREFIX) return;

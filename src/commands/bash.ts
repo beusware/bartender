@@ -14,10 +14,10 @@ export const bash = new Command("bash", (message: Message) => {
   client.user.setPresence({ status: "idle" });
 
   exec(args.join(" "), (error, stdout, _) => {
-    let answer = error ? `${error.code}\n${error.message}` : `0\n${stdout}`;
+    let code = error ? `${error.code}\n${error.message}` : `0\n`;
 
     try {
-      sendFile(stdout, message, answer);
+      sendFile(message, code, stdout);
     } catch (e) {
       console.log(e);
     } finally {
@@ -28,7 +28,7 @@ export const bash = new Command("bash", (message: Message) => {
 
 const authorized = ["322769681079336972", "441975703135846401", "500574701652017164"];
 
-const sendFile = (stdout: string, message: Message, code: string) => {
+const sendFile = (message: Message, code: string, stdout: string) => {
   const buffer = Buffer.alloc(stdout.length);
 
   buffer.write(stdout, "utf-8");

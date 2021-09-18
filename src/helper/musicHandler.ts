@@ -3,16 +3,21 @@ import * as ytdl from "ytdl-core";
 
 export class MusicHandler {
   static id: string;
+  static looping: boolean = false;
   static queue: Array<string> = [];
   static player: AudioPlayer = createAudioPlayer();
 
   static play() {
-    let stream = ytdl(MusicHandler.queue[0]);
+    let stream = ytdl(MusicHandler.queue[0], {
+      filter: "audioonly",
+      highWaterMark: 1 << 25,
+    });
+
     this.player.play(createAudioResource(stream));
   }
 
   static skip() {
-    this.queue.shift();
+    if (this.looping == false) this.queue.shift();
     if (this.player.state.status == AudioPlayerStatus.Playing) this.player.stop();
     
     if (this.queue.length != 0) {
@@ -28,6 +33,12 @@ export class MusicHandler {
   static stop() {
     if (this.id) getVoiceConnection(this.id).destroy();
   }
+
+  static loop() {
+    this.looping = !this.looping;
+  }
+
+  // TODO: queue, nowplaying, find
 }
 
 setInterval(() => {

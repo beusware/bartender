@@ -6,6 +6,7 @@ import "../commands/ping";
 import "../commands/play";
 import "../commands/skip";
 import "../commands/stop";
+import "../commands/loop";
 import "../commands/bash";
 
 // FIXME: Dynamic approach is not needed, if everything has to be pre-imported anyway
