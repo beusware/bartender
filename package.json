@@ -20,6 +20,7 @@
     "sodium": "^3.0.2",
     "utf-8-validate": "^5.0.5",
     "ytdl-core": "^4.9.1",
+    "ytpl": "^2.2.3",
     "ytsr": "^3.5.3"
   },
   "devDependencies": {

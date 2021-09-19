@@ -8,6 +8,7 @@ import "../commands/skip";
 import "../commands/stop";
 import "../commands/loop";
 import "../commands/bash";
+import "../commands/queue";
 
 // FIXME: Dynamic approach is not needed, if everything has to be pre-imported anyway
 export const getCommandCollection = async (): Promise<Collection<string, Function>> => {

@@ -7,8 +7,8 @@ export const ping = new Command("help", (message: Message) => {
       .setColor(0x2ECC71)
       .setTitle("Hilfe")
       .setDescription("Das sind meine Befehle. Einige haben ja vielleicht Aliasse. :wink:")
-      .addField("Musik", "`play`, `skip`, `stop`, `loop`")
-      .addField("Anderes", "`ping`")
+      .addField("Musik", "`play`, `skip`, `stop`, `loop`, `queue`")
+      .addField("Anderes", "`ping`");
 
   message.reply({ embeds: [ embed ] });
 });

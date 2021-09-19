@@ -1,14 +1,16 @@
 import { AudioPlayer, AudioPlayerStatus, createAudioPlayer, createAudioResource, getVoiceConnection } from "@discordjs/voice";
 import * as ytdl from "ytdl-core";
 
+import { Song } from "./songClass";
+
 export class MusicHandler {
   static id: string;
   static looping: boolean = false;
-  static queue: Array<string> = [];
+  static queue: Array<Song> = [];
   static player: AudioPlayer = createAudioPlayer();
 
   static play() {
-    let stream = ytdl(MusicHandler.queue[0], {
+    let stream = ytdl(MusicHandler.queue[0].url, {
       filter: "audioonly",
       highWaterMark: 1 << 25,
     });
@@ -32,13 +34,12 @@ export class MusicHandler {
 
   static stop() {
     if (this.id) getVoiceConnection(this.id).destroy();
+    this.queue = [];
   }
 
   static loop() {
     this.looping = !this.looping;
   }
-
-  // TODO: queue, nowplaying, find
 }
 
 setInterval(() => {
