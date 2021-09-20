@@ -23,7 +23,10 @@ export const play = new Command("play", async (message: Message) => {
 });
 
 const getSong = async (args: Array<string>, message: Message): Promise<Song> => {
-  message.reply(`:mag_right: Jawohl! Suche nach ${args.join(" ")}`)
+  message.reply(`:mag_right: Jawohl! Suche nach \`${args.join(" ")}\``);
+
+  if (args[0] == "ltgtr$") return await handleVideo([ "https://www.youtube.com/watch?v=yE2YeW99_tE" ], message);
+  if (args[0] == "hh$") return await handleVideo([ "https://www.youtube.com/watch?v=SGvo_YY3GkE" ], message);
 
   if (ytdl.validateURL(args[0])) {
     return await handleVideo(args, message);
